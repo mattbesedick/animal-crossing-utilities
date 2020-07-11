@@ -19,15 +19,23 @@ router.get("/", async (req, res, next) => {
         result.forEach((doc) => {
             fish.push(doc.data())
         })
-        res.send(fish)
+        res.send(fish).status(200)
 
     } catch (error) {
+        res.send(`Error getting the fish: ${error}`)
         next(error)
     }
 })
 
 router.get("/:name", async (req, res, next) => {
-    res.send(`${req.params.name}`)
+    try {
+        const docRef = db.collection('fish').doc(`${req.params.name}`)
+        const result = await docRef.get()
+        console.log(result)
+        res.send(result.data())
+    } catch (error) {
+        next(error)
+    }
 })
 
 router.post("/", async (req, res, next) => {
