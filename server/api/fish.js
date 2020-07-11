@@ -3,7 +3,7 @@ const db = require('../db')
 module.exports = router
 
 router.get("/", async (req, res, next) => {
-    res.send("this a fish")
+    res.send("this is fish")
 })
 
 router.post("/", async (req, res, next) => {
