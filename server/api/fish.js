@@ -29,10 +29,16 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:name", async (req, res, next) => {
     try {
+
         const docRef = db.collection('fish').doc(`${req.params.name}`)
         const result = await docRef.get()
-        console.log(result)
-        res.send(result.data())
+
+        if (!result.exists) {
+            console.log("document doens't exist!")
+        } else {
+            res.send(result.data())
+        }
+
     } catch (error) {
         next(error)
     }

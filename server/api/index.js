@@ -4,6 +4,7 @@ module.exports = router
 
 //all routing files will live in here
 router.use('/fish', require('./fish'))
+router.use('/caught', require('./caught'))
 
 
 //if route isn't found
